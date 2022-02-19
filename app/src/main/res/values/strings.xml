@@ -8,4 +8,5 @@
     <string name="user_name">Johnson Osei Yeboah</string>
     <string name="user_role">Software Engineer</string>
     <string name="help_text">Feel Free to Ask,We\'re Ready to Help!</string>
+    <string name="settings">Settings</string>
 </resources>
