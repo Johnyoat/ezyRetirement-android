@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ezyRetirement</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="referral_code">Referral Code</string>
+    <string name="subscription">Subscription</string>
+    <string name="personal_data">Personal Data</string>
+    <string name="user_name">Johnson Osei Yeboah</string>
+    <string name="user_role">Software Engineer</string>
+    <string name="help_text">Feel Free to Ask,We\'re Ready to Help!</string>
 </resources>
