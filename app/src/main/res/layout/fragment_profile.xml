@@ -28,7 +28,7 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/jay"
+                    android:src="@drawable/user"
                     android:scaleType="centerCrop"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
