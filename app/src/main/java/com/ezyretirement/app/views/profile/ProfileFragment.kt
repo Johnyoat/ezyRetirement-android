@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ezyretirement.app.R
 import com.ezyretirement.app.databinding.FragmentProfileBinding
+import com.ezyretirement.app.ext.replaceFragmentWith
+import com.ezyretirement.app.views.personalData.PersonalDataFragment
+import com.ezyretirement.app.views.userInformation.UserInformationFragment
 import com.google.android.material.transition.MaterialFadeThrough
 
 class ProfileFragment : Fragment() {
@@ -27,4 +30,13 @@ class ProfileFragment : Fragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.personalData.setOnClickListener {
+            replaceFragmentWith(PersonalDataFragment())
+        }
+
+
+    }
 }
