@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.ezyretirement.app.databinding.ActivityUserInformationBinding
 import com.google.android.material.transition.MaterialFadeThrough
 
-class UserInformationActivity : Fragment() {
+class UserInformationFragment : Fragment() {
     private lateinit var binding: ActivityUserInformationBinding
 
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ezyretirement.app.databinding.ActivityLoginSplashBinding
 import com.ezyretirement.app.views.MainActivity
-import com.ezyretirement.app.views.userInformation.UserInformationActivity
 
 class LoginSplashActivity : AppCompatActivity() {
 

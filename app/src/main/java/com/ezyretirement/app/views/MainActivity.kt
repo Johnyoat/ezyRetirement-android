@@ -3,6 +3,8 @@ package com.ezyretirement.app.views
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ezyretirement.app.databinding.ActivityMainBinding
+import com.ezyretirement.app.ext.commitFragment
+import com.ezyretirement.app.views.userInformation.UserInformationFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -11,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        commitFragment(UserInformationFragment())
 
     }
 }
