@@ -1,4 +1,4 @@
-package com.ezyretirement.app.views
+package com.ezyretirement.app.views.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
