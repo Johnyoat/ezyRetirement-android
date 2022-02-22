@@ -1,8 +1,11 @@
 package com.ezyretirement.app.views.loginSplash
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ezyretirement.app.databinding.ActivityLoginSplashBinding
+import com.ezyretirement.app.views.MainActivity
+import com.ezyretirement.app.views.userInformation.UserInformationActivity
 
 class LoginSplashActivity : AppCompatActivity() {
 
@@ -11,5 +14,12 @@ class LoginSplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginSplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+        binding.getStartedBtn.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
     }
 }
