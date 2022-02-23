@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.stimulation.StimulationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.stimulation.StimulationFragment"
+    android:background="@color/colorPrimary">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello"
+        android:id="@+id/hello"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorSecondaryVariant"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Johnson"
+        android:layout_below="@id/hello"
+        android:layout_marginStart="14dp"
+        android:textColor="@color/colorSecondary"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:id="@+id/userName"
+        android:layout_marginBottom="32dp"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userProfile"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/stimulationContainer"
+        android:layout_marginBottom="-32dp"
+        android:translationZ="1dp"
+        app:civ_border_color="@color/colorSecondary"
+        app:civ_border_width="2dp"/>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_below="@id/userName"
+        android:background="@drawable/left_curve"
+        android:id="@+id/stimulationContainer"
+        android:backgroundTint="@color/litGray"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="16dp"
+            android:background="@drawable/curve_edges"
+            android:backgroundTint="@color/white">
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

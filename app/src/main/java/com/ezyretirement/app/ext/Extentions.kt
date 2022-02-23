@@ -14,7 +14,9 @@ fun AppCompatActivity.commitFragment(fragment: Fragment) {
 
 
 fun Fragment.replaceFragmentWith(fragment: Fragment){
-    this.parentFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
+    this.parentFragmentManager.beginTransaction()
+        .addToBackStack("FRAG")
+        .replace(R.id.container,fragment).commit()
 }
 
 fun AppCompatImageView.load(context: Context,url:String){

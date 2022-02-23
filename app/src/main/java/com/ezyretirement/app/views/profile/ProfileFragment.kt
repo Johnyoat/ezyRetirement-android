@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ezyretirement.app.R
 import com.ezyretirement.app.databinding.FragmentProfileBinding
 import com.ezyretirement.app.ext.replaceFragmentWith
 import com.ezyretirement.app.views.personalData.PersonalDataFragment
-import com.ezyretirement.app.views.userInformation.UserInformationFragment
 import com.google.android.material.transition.MaterialFadeThrough
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var binding:FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +33,10 @@ class ProfileFragment : Fragment() {
 
         binding.personalData.setOnClickListener {
             replaceFragmentWith(PersonalDataFragment())
+        }
+
+        binding.toolbar.backBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
 

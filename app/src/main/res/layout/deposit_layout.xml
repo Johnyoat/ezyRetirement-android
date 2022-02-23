@@ -27,7 +27,7 @@
             android:layout_height="28dp"
             android:scaleType="centerCrop"
             android:src="@drawable/user"
-            app:civ_border_color="@color/dark_gray"
+            app:civ_border_color="@color/darkGray"
             app:civ_border_width="1dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_minus"
-            app:backgroundTint="@color/dark_gray"
+            app:backgroundTint="@color/darkGray"
             app:borderWidth="1dp"
             app:elevation="0dp"
             app:fabCustomSize="48dp" />
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_plus"
-            app:backgroundTint="@color/dark_gray"
+            app:backgroundTint="@color/darkGray"
             app:borderWidth="1dp"
             app:elevation="0dp"
             app:fabCustomSize="48dp" />
