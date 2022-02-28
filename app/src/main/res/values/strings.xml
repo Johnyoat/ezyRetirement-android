@@ -31,4 +31,6 @@
     <string name="hello">Hello,</string>
     <string name="previous">Previous</string>
     <string name="close">Close</string>
+    <string name="if_you_retire_at">If you retire at</string>
+    <string name="_67_years_old">67 years old</string>
 </resources>
