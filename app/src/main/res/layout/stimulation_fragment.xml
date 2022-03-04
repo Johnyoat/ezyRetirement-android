@@ -10,10 +10,10 @@
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:lottie_rawRes="@raw/particle"
         android:scaleType="centerCrop"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/particle" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/hello"
@@ -63,7 +63,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -200,6 +200,13 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/retirementStageList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/retirement_stage_item" />
 
 
         </LinearLayout>

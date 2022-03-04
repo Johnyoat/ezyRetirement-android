@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.ezyretirement.app.R
 import com.ezyretirement.app.databinding.StimulationFragmentBinding
 import com.ezyretirement.app.ext.replaceFragmentWith
 import com.ezyretirement.app.views.profile.ProfileFragment
@@ -15,7 +14,8 @@ import com.google.android.material.transition.MaterialFadeThrough
 class StimulationFragment : Fragment() {
 
     private val viewModel by viewModels<StimulationViewModel>()
-    private lateinit var binding:StimulationFragmentBinding
+    private lateinit var binding: StimulationFragmentBinding
+    private var retirementAge = 67
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class StimulationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = StimulationFragmentBinding.inflate(inflater,container,false)
+        binding = StimulationFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,9 +35,40 @@ class StimulationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        setRetirementText()
+
         binding.userProfile.setOnClickListener {
             replaceFragmentWith(ProfileFragment())
         }
+
+        binding.plus.setOnClickListener {
+            increaseRetirementYear()
+        }
+
+
+        binding.minus.setOnClickListener {
+            decreaseRetirementYear()
+        }
+
+    }
+
+
+    private fun increaseRetirementYear() {
+        retirementAge++
+        setRetirementText()
+    }
+
+
+    private fun decreaseRetirementYear() {
+        retirementAge--
+        setRetirementText()
+
+    }
+
+
+    private fun setRetirementText() {
+        "$retirementAge Years old".also { binding.retirementAge.text = it }
     }
 
 }
