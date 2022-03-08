@@ -1,16 +1,16 @@
 package com.ezyretirement.app.models
 
 data class PersonalData(
-    val name: String = "",
-    val userProfileImageUrl: String = "",
-    val occupation: String = "",
-    val dob: Long = 0,
-    val currentSalary:Long = 0,
-    val scenario:String = "",
-    val currentRetirementNest:Long=0,
-    val yearlyContribution:Long=0,
-    val estimatedYearlySalary:Long=0,
-    val yearsToRetirement:Int=0,
-    val desiredActiveRetirementSalary:Long=0,
-    val salaryAfterActiveYears:Long=0,
+    var name: String = "",
+    var userProfileImageUrl: String = "",
+    var occupation: String = "",
+    var dob: Long = 0,
+    var currentSalary:Long = 0,
+    var scenario:String = "",
+    var currentRetirementNest:Long=0,
+    var yearlyContribution:Long=0,
+    var estimatedYearlySalary:Long=0,
+    var yearsToRetirement:Int=0,
+    var desiredActiveRetirementSalary:Long=0,
+    var salaryAfterActiveYears:Long=0,
 )
