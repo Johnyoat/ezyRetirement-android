@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.transition.TransitionManager
 import com.ezyretirement.app.R
 import com.ezyretirement.app.databinding.ActivityUserInformationBinding
-import com.ezyretirement.app.ext.isInputsValid
-import com.ezyretirement.app.ext.replaceFragmentWith
-import com.ezyretirement.app.ext.toDateString
+import com.ezyretirement.app.ext.*
 import com.ezyretirement.app.models.PersonalData
+import com.ezyretirement.app.viewModels.UserDataViewModel
 import com.ezyretirement.app.views.stimulation.StimulationFragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -23,7 +24,8 @@ class UserInformationFragment : Fragment() {
     private lateinit var binding: ActivityUserInformationBinding
     private val sharedAxis = MaterialSharedAxis(MaterialSharedAxis.X, true)
     private var step = 0
-
+    private val personData = PersonalData()
+    private val userDataViewModel by viewModels<UserDataViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enterTransition = MaterialFadeThrough()
@@ -45,7 +47,6 @@ class UserInformationFragment : Fragment() {
 
         val items = listOf("Snow Bird", "Other One")
         val adapter = ArrayAdapter(requireContext(), R.layout.scenario_list_item, items)
-        val personData = PersonalData()
         step = 0
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -57,6 +58,17 @@ class UserInformationFragment : Fragment() {
             binding.dob.editText?.setText(date.toDateString())
             personData.dob = date
         }
+
+//        checkInputTexts(
+//            binding.name,
+//            binding.dob,
+//            binding.currentSalary,
+//            binding.occupation,
+//            binding.scenario,
+//            binding.yearsToRetirement,
+//            binding.yearlyContribution,
+//            binding.desiredActiveRetirementSalary
+//        )
 
         (binding.scenario.editText as AutoCompleteTextView).setAdapter(adapter)
 
@@ -102,8 +114,8 @@ class UserInformationFragment : Fragment() {
         }
 
 
-
-        binding.dob.setOnClickListener {
+        val dob = view.findViewById<TextInputEditText>(R.id.dobEdit)
+        dob.setOnClickListener {
             datePicker.show(childFragmentManager, "dob")
         }
 
@@ -112,7 +124,11 @@ class UserInformationFragment : Fragment() {
 
 
     private fun verifyUserDetails() {
-        if (isInputsValid()){
+        if (isInputsValid(binding.name, binding.dob, binding.currentSalary, binding.occupation)) {
+            personData.name = binding.name.text()
+            personData.occupation = binding.occupation.text()
+            personData.currentSalary = binding.currentSalary.text().toDouble()
+
             binding.userRetirementInfo.visibility = View.VISIBLE
             binding.userInformation.visibility = View.GONE
             step++
@@ -122,7 +138,18 @@ class UserInformationFragment : Fragment() {
 
     private fun verifyRetirementDetails() {
 
-        if (isInputsValid()){
+        if (isInputsValid(
+                binding.scenario,
+                binding.yearsToRetirement,
+                binding.yearlyContribution,
+                binding.desiredActiveRetirementSalary
+            )
+        ) {
+            personData.scenario = binding.scenario.text()
+            personData.yearsToRetirement = binding.yearsToRetirement.text().toInt()
+            personData.yearlyContribution = binding.yearlyContribution.text().toDouble()
+
+
             binding.userRetirement.visibility = View.VISIBLE
             binding.userRetirementInfo.visibility = View.GONE
             step++
@@ -133,6 +160,6 @@ class UserInformationFragment : Fragment() {
 
 
     private fun computeRetirementPolicy() {
-        replaceFragmentWith(StimulationFragment())
+        replaceFragmentWith(StimulationFragment(personData))
     }
 }

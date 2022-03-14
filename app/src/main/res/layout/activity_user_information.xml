@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/colorPrimary"
-    tools:context=".views.userInformation.UserInformationFragment"
-    android:animateLayoutChanges="true">
+    tools:context=".views.userInformation.UserInformationFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_background_moutain"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_background_moutain" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,24 +37,23 @@
             android:textColor="@color/white" />
 
 
-
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
     </RelativeLayout>
 
 
     <LinearLayout
+        android:id="@+id/userInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/curve_top"
         android:backgroundTint="@color/white"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:id="@+id/userInfoContainer">
+        android:padding="16dp">
 
         <LinearLayout
             android:id="@+id/userInformation"
@@ -100,10 +99,12 @@
                 app:startIconDrawable="@drawable/ic_calendar">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dobEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:focusable="false"/>
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:inputType="textCapWords" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,6 +182,22 @@
                     android:inputType="numberDecimal" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/desiredActiveRetirementSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/desired_income_at_salary_active_years"
+                app:startIconDrawable="@drawable/ic_crosshair">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -236,21 +253,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/desiredActiveRetirementSalary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/desired_income_at_salary_active_years"
-                app:startIconDrawable="@drawable/ic_crosshair">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/salaryAfterActiveYears"

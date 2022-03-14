@@ -10,7 +10,8 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:gravity="center"
-        android:text="at 58" />
+        android:text="at 58"
+        android:id="@+id/retirementAge"/>
 
 
     <LinearLayout
@@ -48,6 +49,12 @@
         android:padding="16dp"
         android:background="@drawable/curve_edges"
         android:backgroundTint="@color/white">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/retirementStatement"
+            android:text=""/>
 
     </LinearLayout>
 

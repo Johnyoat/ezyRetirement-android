@@ -141,6 +141,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/currentRetirementNest"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="$2,872"
@@ -149,7 +150,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Income"
+                            android:text="Required Amount"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
 
@@ -163,15 +164,16 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/yearlyContribution"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$2,872"
+                            android:text="2%"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Expenses"
+                            android:text="Contributions"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
                     </LinearLayout>
 

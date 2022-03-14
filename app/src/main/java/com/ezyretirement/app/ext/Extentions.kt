@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources.getSystem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.ezyretirement.app.R
@@ -39,11 +40,34 @@ fun Fragment.isInputsValid(vararg inputs:TextInputLayout) :Boolean{
     var validCounter = 0
 
     inputs.forEach { input ->
-        input.editText?.text?.length!! > 3
-        validCounter++
+        if ( !input.editText?.text?.isEmpty()!!){
+            validCounter++
+        }else{
+            input.error = "${input.hint} field required!"
+        }
+
+
     }
 
     return validCounter >= size
+}
+
+
+fun Fragment.checkInputTexts(vararg inputs:TextInputLayout){
+        inputs.forEach { input ->
+            input.editText?.doOnTextChanged { text, start, before, count ->
+                if (text!!.length < 3){
+                    input.error = "${input.hint} is not valid"
+                }else{
+                    input.error = null
+                }
+            }
+        }
+}
+
+
+fun TextInputLayout.text():String{
+    return this.editText!!.text.toString()
 }
 
 
