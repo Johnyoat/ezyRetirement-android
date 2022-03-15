@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.transition.TransitionManager
@@ -13,10 +11,10 @@ import com.ezyretirement.app.R
 import com.ezyretirement.app.databinding.ActivityUserInformationBinding
 import com.ezyretirement.app.ext.*
 import com.ezyretirement.app.models.PersonalData
+import com.ezyretirement.app.models.RetirementStateModel
 import com.ezyretirement.app.viewModels.UserDataViewModel
 import com.ezyretirement.app.views.stimulation.StimulationFragment
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -45,8 +43,6 @@ class UserInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = listOf("Snow Bird", "Other One")
-        val adapter = ArrayAdapter(requireContext(), R.layout.scenario_list_item, items)
         step = 0
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -57,20 +53,10 @@ class UserInformationFragment : Fragment() {
             val date = dob + 86400000
             binding.dob.editText?.setText(date.toDateString())
             personData.dob = date
+
+
         }
 
-//        checkInputTexts(
-//            binding.name,
-//            binding.dob,
-//            binding.currentSalary,
-//            binding.occupation,
-//            binding.scenario,
-//            binding.yearsToRetirement,
-//            binding.yearlyContribution,
-//            binding.desiredActiveRetirementSalary
-//        )
-
-        (binding.scenario.editText as AutoCompleteTextView).setAdapter(adapter)
 
         binding.nextBtn.setOnClickListener {
             TransitionManager.beginDelayedTransition(binding.userInfoContainer, sharedAxis)
@@ -84,9 +70,9 @@ class UserInformationFragment : Fragment() {
                     verifyRetirementDetails()
                 }
 
-                2 -> {
-                    computeRetirementPolicy()
-                }
+//                2 -> {
+//                    computeRetirementPolicy()
+//                }
             }
         }
 
@@ -114,9 +100,10 @@ class UserInformationFragment : Fragment() {
         }
 
 
-        val dob = view.findViewById<TextInputEditText>(R.id.dobEdit)
-        dob.setOnClickListener {
-            datePicker.show(childFragmentManager, "dob")
+
+
+        binding.viewReport.setOnClickListener {
+            replaceFragmentWith(StimulationFragment(personData))
         }
 
 
@@ -124,10 +111,18 @@ class UserInformationFragment : Fragment() {
 
 
     private fun verifyUserDetails() {
-        if (isInputsValid(binding.name, binding.dob, binding.currentSalary, binding.occupation)) {
+        if (isInputsValid(
+                binding.name,
+                binding.dob,
+                binding.currentSalary,
+                binding.occupation,
+            )
+        ) {
             personData.name = binding.name.text()
             personData.occupation = binding.occupation.text()
             personData.currentSalary = binding.currentSalary.text().toDouble()
+            personData.salaryIncrease = binding.salaryIncreaseRate.text().toDouble()
+            personData.age = binding.dob.text().toInt()
 
             binding.userRetirementInfo.visibility = View.VISIBLE
             binding.userInformation.visibility = View.GONE
@@ -139,17 +134,21 @@ class UserInformationFragment : Fragment() {
     private fun verifyRetirementDetails() {
 
         if (isInputsValid(
-                binding.scenario,
+
                 binding.yearsToRetirement,
-                binding.yearlyContribution,
-                binding.desiredActiveRetirementSalary
+                binding.savings,
+                binding.desiredActiveRetirementSalary,
+                binding.savingsInterest
             )
         ) {
-            personData.scenario = binding.scenario.text()
-            personData.yearsToRetirement = binding.yearsToRetirement.text().toInt()
+            personData.retirementAge = binding.yearsToRetirement.text().toInt()
             personData.yearlyContribution = binding.yearlyContribution.text().toDouble()
+            personData.savingsInterest = binding.savingsInterest.text().toDouble()
+            personData.currentSavings = binding.savings.text().toDouble()
+            personData.desiredActiveRetirementSalary =
+                binding.desiredActiveRetirementSalary.text().toDouble()
 
-
+            computeRetirementPolicy()
             binding.userRetirement.visibility = View.VISIBLE
             binding.userRetirementInfo.visibility = View.GONE
             step++
@@ -160,6 +159,48 @@ class UserInformationFragment : Fragment() {
 
 
     private fun computeRetirementPolicy() {
-        replaceFragmentWith(StimulationFragment(personData))
+        binding.btnGroup.visibility = View.GONE
+
+
+        val data = personData.retirementStages
+        var retirementAge = personData.retirementAge
+        val age = personData.age
+        var salary = personData.currentSalary
+        val contributionRate = personData.yearlyContribution/100
+        var contribution = salary * contributionRate
+        val increase = personData.salaryIncrease/100
+        var retirementSavings = salary * contributionRate
+        var totalRetirement = 0.0
+
+        data.add(
+            RetirementStateModel(
+                salary = salary,
+                retirementSavings = retirementSavings,
+                year = retirementAge,
+                contributionAmount = contribution
+            )
+        )
+        while (retirementAge > age) {
+            retirementAge--
+            salary += (salary * increase)
+            retirementSavings += (salary * contributionRate)
+            contribution = salary * contributionRate
+
+            totalRetirement += retirementSavings
+
+            data.add(
+                RetirementStateModel(
+                    salary = salary,
+                    retirementSavings = retirementSavings,
+                    year = retirementAge,
+                    contributionAmount = contribution
+                )
+            )
+        }
+
+
+        binding.retirementSavings.text = totalRetirement.toUSD()
+        personData.totalRetirementSaving = totalRetirement
+
     }
 }

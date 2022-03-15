@@ -5,14 +5,15 @@ data class PersonalData(
     var userProfileImageUrl: String = "",
     var occupation: String = "",
     var dob: Long = 0,
+    var age: Int = 0,
     var currentSalary: Double = 0.0,
-    var scenario: String = "",
-    var currentRetirementNest: Double = 0.0,
     var yearlyContribution: Double = 0.0,
-    var estimatedYearlySalary: Double = 0.0,
-    var yearsToRetirement: Int = 0,
+    var retirementAge: Int = 0,
     var desiredActiveRetirementSalary: Double = 0.0,
-    var salaryAfterActiveYears: Double = 0.0,
+    var retirementSavings: Double = 0.0,
     var retirementStages: MutableList<RetirementStateModel> = mutableListOf(),
-    var isContributionRate:Boolean = false
+    var salaryIncrease: Double = 0.0,
+    var currentSavings: Double = 0.0,
+    var savingsInterest: Double = 0.0,
+    var totalRetirementSaving: Double = 0.0
 )

@@ -1,9 +1,8 @@
 package com.ezyretirement.app.models
 
 data class RetirementStateModel(
-    var beginningBalance: Double = 0.0,
-    var withdraw: Double = 0.0,
-    var interest: Double = 0.0,
-    var endBalance: Double = 0.0,
-    var year: String = ""
+    var salary: Double = 0.0,
+    var retirementSavings: Double = 0.0,
+    var year: Int = 0,
+    var contributionAmount: Double = 0.0
 )

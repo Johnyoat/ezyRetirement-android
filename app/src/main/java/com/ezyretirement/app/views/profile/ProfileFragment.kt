@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ezyretirement.app.databinding.FragmentProfileBinding
 import com.ezyretirement.app.ext.replaceFragmentWith
+import com.ezyretirement.app.models.PersonalData
 import com.ezyretirement.app.views.personalData.PersonalDataFragment
 import com.google.android.material.transition.MaterialFadeThrough
 
-class ProfileFragment : Fragment() {
+class ProfileFragment(private val personData:PersonalData) : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
@@ -32,7 +33,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.personalData.setOnClickListener {
-            replaceFragmentWith(PersonalDataFragment())
+            replaceFragmentWith(PersonalDataFragment(personData))
         }
 
         binding.toolbar.backBtn.setOnClickListener {

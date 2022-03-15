@@ -17,7 +17,7 @@
     <string name="average_annual_rate_of_return">Average Annual Rate of Return</string>
     <string name="yearly_contribution">Yearly Contribution</string>
     <string name="estimated_yearly_salary">Estimated Yearly Salary</string>
-    <string name="number_of_years_to_retirement">Number of Years to Retirement</string>
+    <string name="number_of_years_to_retirement">Age of Retirement</string>
     <string name="desired_income_at_salary_active_years">Desired Income at Salary(Active Years)</string>
     <string name="salary_after_active_years">Salary After Active Years</string>
     <string name="change_image">change image</string>
@@ -33,4 +33,5 @@
     <string name="close">Close</string>
     <string name="if_you_retire_at">If you retire at</string>
     <string name="_67_years_old">67 years old</string>
+    <string name="congratulations">Congratulations!</string>
 </resources>

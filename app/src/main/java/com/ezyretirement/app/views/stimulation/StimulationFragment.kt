@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.ezyretirement.app.adapters.RetirementStageListAdapter
 import com.ezyretirement.app.databinding.StimulationFragmentBinding
 import com.ezyretirement.app.ext.replaceFragmentWith
+import com.ezyretirement.app.ext.toUSD
 import com.ezyretirement.app.models.PersonalData
+import com.ezyretirement.app.models.RetirementStateModel
 import com.ezyretirement.app.viewModels.UserDataViewModel
 import com.ezyretirement.app.views.profile.ProfileFragment
 import com.google.android.material.transition.MaterialFadeThrough
 
-class StimulationFragment(private val personalData: PersonalData) : Fragment() {
+class StimulationFragment(private val personData: PersonalData) : Fragment() {
 
     private val viewModel by viewModels<UserDataViewModel>()
     private lateinit var binding: StimulationFragmentBinding
-    private var retirementAge = personalData.yearsToRetirement
+    private var retirementAge = personData.retirementAge
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,25 +44,21 @@ class StimulationFragment(private val personalData: PersonalData) : Fragment() {
         setRetirementText()
 
 
-            binding.userName.text = personalData.name
-            binding.retirementAge.text = personalData.yearsToRetirement.toString()
-            binding.currentRetirementNest.text = "$${personalData.currentRetirementNest}"
+            binding.userName.text = personData.name
+            binding.currentRetirementNest.text = personData.totalRetirementSaving.toUSD()
 
-            binding.yearlyContribution.text = if (personalData.isContributionRate){
-                "${personalData.yearlyContribution} %"
-            }else{
-                "$${personalData.yearlyContribution}"
-            }
+            binding.yearlyContribution.text = "${personData.yearlyContribution} %"
+
 
 
         binding.retirementStageList.apply {
-            adapter = RetirementStageListAdapter(personalData.retirementStages,requireContext())
+            adapter = RetirementStageListAdapter(personData.retirementStages,requireContext())
         }
 
 
 
         binding.userProfile.setOnClickListener {
-            replaceFragmentWith(ProfileFragment())
+            replaceFragmentWith(ProfileFragment(personData))
         }
 
         binding.plus.setOnClickListener {
@@ -78,18 +75,68 @@ class StimulationFragment(private val personalData: PersonalData) : Fragment() {
 
     private fun increaseRetirementYear() {
         retirementAge++
+        computeRetirementPolicy(retirementAge)
         setRetirementText()
     }
 
 
     private fun decreaseRetirementYear() {
         retirementAge--
+        computeRetirementPolicy(retirementAge)
         setRetirementText()
     }
 
 
     private fun setRetirementText() {
         "$retirementAge Years old".also { binding.retirementAge.text = it }
+    }
+
+
+    private fun computeRetirementPolicy(age:Int) {
+
+        val data = mutableListOf<RetirementStateModel>()
+        var retirementAge = personData.retirementAge
+        var salary = personData.currentSalary
+        val contributionRate = personData.yearlyContribution/100
+        var contribution = salary * contributionRate
+        val increase = personData.salaryIncrease/100
+        var retirementSavings = salary * contributionRate
+        var totalRetirement = 0.0
+
+        data.add(
+            RetirementStateModel(
+                salary = salary,
+                retirementSavings = retirementSavings,
+                year = retirementAge,
+                contributionAmount = contribution
+            )
+        )
+        while (retirementAge > age) {
+            retirementAge--
+            salary += (salary * increase)
+            retirementSavings += (salary * contributionRate)
+            contribution = salary * contributionRate
+
+            totalRetirement += retirementSavings
+
+            data.add(
+                RetirementStateModel(
+                    salary = salary,
+                    retirementSavings = retirementSavings,
+                    year = retirementAge,
+                    contributionAmount = contribution
+                )
+            )
+        }
+
+        binding.retirementSavings.text = totalRetirement.toUSD()
+        personData.totalRetirementSaving = totalRetirement
+
+
+        binding.retirementStageList.apply {
+            adapter = RetirementStageListAdapter(data,requireContext())
+        }
+
     }
 
 }

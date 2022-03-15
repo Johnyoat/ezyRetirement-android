@@ -10,7 +10,9 @@ import com.bumptech.glide.Glide
 import com.ezyretirement.app.R
 import com.google.android.material.textfield.TextInputLayout
 import java.text.DateFormat
+import java.text.NumberFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 fun AppCompatActivity.commitFragment(fragment: Fragment) {
     this.supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
@@ -70,6 +72,12 @@ fun TextInputLayout.text():String{
     return this.editText!!.text.toString()
 }
 
+fun Double.toUSD():String{
+    val format: NumberFormat = NumberFormat.getCurrencyInstance()
+    format.maximumFractionDigits = 0
+    format.currency = Currency.getInstance("USD")
 
+    return format.format(this.roundToInt())
+}
 
 val Int.dp: Int get() = (this / getSystem().displayMetrics.density).toInt()

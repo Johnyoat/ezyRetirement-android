@@ -148,9 +148,10 @@
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/retirementSavings"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Required Amount"
+                            android:text="Retirement Savings"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
 
@@ -175,28 +176,6 @@
                             android:layout_height="wrap_content"
                             android:text="Contributions"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="$2,872"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Gap"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
-
-
                     </LinearLayout>
 
                 </LinearLayout>
